@@ -3,22 +3,26 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
-// const session = require("express-session");
+const session = require("express-session");
 const cors = require("cors");
 const authRoutes = require("./routes");
 
-app.use(cors());
-// app.set('trust proxy', 1);
-// app.use(session({
-//   secret: `${process.env.SESSION_SECRET}`,
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: {
-//     httpOnly: false,
-//     secure: true,
-//     sameSite: 'none',
-//   }
-// }));
+app.set('trust proxy', 1);
+app.use(session({
+  secret: `${process.env.SESSION_SECRET}`,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: false,
+    secure: true,
+    sameSite: 'none',
+  }
+}));
+
+app.use(cors({
+  credentials: true,
+  origin: process.env.CLIENT_URL_DEV,
+}));
 
 app.use(passport.initialize());
 require("./services/googleStrategy");

@@ -20,14 +20,9 @@ router.get(
   }),
   (req, res) => {
     const token = generateJWT(req.user);
-    res.cookie("x-auth-cookie", "abc", {
-      domain: "https://oauthclient.onrender.com",
-      expires: new Date(Date.now() + 900000),
-      httpOnly: false,
-      secure: true,
-      sameSite: "none",
-    });
-    res.redirect(clientUrl);
+    // res.cookie("x-auth-cookie", token);
+    // res.redirect(clientUrl);
+    res.status(200).json({ user: req.user });
   },
 );
 
