@@ -3,10 +3,22 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
+const session = require("express-session");
 const cors = require("cors");
 const authRoutes = require("./routes");
 
 app.use(cors());
+
+app.use(session({
+  secret: `${process.env.SESSION_SECRET}`,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: false,
+    secure: false,
+    sameSite: 'none',
+  }
+}));
 
 app.use(passport.initialize());
 require("./services/googleStrategy");
