@@ -9,7 +9,7 @@ const authRoutes = require("./routes");
 
 app.use(express.json());
 
-app.set('trust proxy', 1);
+// app.set("trust proxy", 1);
 // app.use(session({
 //   secret: `${process.env.SESSION_SECRET}`,
 //   resave: false,
@@ -21,10 +21,14 @@ app.set('trust proxy', 1);
 //   }
 // }));
 
-app.use(cors({
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL_DEV,
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+    allowedHeaders: "Content-Type,Authorization",
+  }),
+);
 
 app.use(passport.initialize());
 require("./services/googleStrategy");
