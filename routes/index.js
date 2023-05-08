@@ -19,9 +19,7 @@ router.get(
     session: false,
   }),
   (req, res) => {
-    console.log(req.user);
     const token = generateJWT(req.user);
-    console.log(token);
     res.cookie('x-auth-cookie', token);
     res.redirect(clientUrl);
   },
