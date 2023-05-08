@@ -23,7 +23,7 @@ app.use(session({
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL_DEV,
+    origin: "https://oauthclient.onrender.com",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
     allowedHeaders: "Content-Type,Authorization",
