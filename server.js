@@ -7,6 +7,8 @@ const passport = require("passport");
 const cors = require("cors");
 const authRoutes = require("./routes");
 
+app.use(express.json());
+
 app.set('trust proxy', 1);
 // app.use(session({
 //   secret: `${process.env.SESSION_SECRET}`,
