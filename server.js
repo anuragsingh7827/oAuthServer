@@ -8,11 +8,11 @@ const cors = require("cors");
 const authRoutes = require("./routes");
 
 app.use(cors());
-
+app.set('trust proxy', 1);
 app.use(session({
   secret: `${process.env.SESSION_SECRET}`,
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
     httpOnly: false,
     secure: true,
